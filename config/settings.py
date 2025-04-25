@@ -31,7 +31,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = ["*"]
 
@@ -79,8 +79,8 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings')
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
-        'APP_DIRS': True,
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],  # Указываем путь к папке templates в корне проекта
+        'APP_DIRS': True,  # Это позволит Django искать шаблоны в папках приложений
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
@@ -97,9 +97,10 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
+    # Разрешения для всех пользователей
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.AllowAny',
-
+        'rest_framework.permissions.AllowAny',  # Для открытых эндпоинтов, например, регистрации
+        # Убираем DjangoModelPermissionsOrAnonReadOnly для регистрации
     ],
 }
 
@@ -144,8 +145,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATIC_URL = '/static/'  # URL для статики
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = 'static/'
+
+# Default primary key field type
+# https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings')
 
