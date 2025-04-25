@@ -72,24 +72,6 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'config.urls'
 
 
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'file': {
-            'level': 'ERROR',
-            'class': 'logging.FileHandler',
-            'filename': '/path/to/your/project/django.log',
-        },
-    },
-    'loggers': {
-        'django': {
-            'handlers': ['file'],
-            'level': 'ERROR',
-            'propagate': True,
-        },
-    },
-}
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings')
 
