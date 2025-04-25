@@ -4,7 +4,7 @@ from .models import Product, Brand, Category
 class ProductForm(forms.ModelForm):
     class Meta:
         model = Product
-        fields = ['name', 'description', 'price', 'image','brand','categories']  # добавьте все нужные поля
+        fields = ['name', 'description', 'price', 'image','brand','categories']
 
 
 class ProductFormUpdate(forms.ModelForm):
