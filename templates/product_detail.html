@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ product.name }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #4CAF50;
+        }
+        .field {
+            margin-bottom: 20px;
+        }
+        .field label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+        img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+            display: block;
+            margin-top: 10px;
+        }
+        a {
+            display: block;
+            margin-top: 30px;
+            text-align: center;
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        a:hover {
+            background-color: black;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Информация о продукте</h2>
+
+        <div class="field">
+            <label>Название:</label>
+            <div>{{ product.name }}</div>
+        </div>
+
+        <div class="field">
+            <label>Описание:</label>
+            <div>{{ product.description }}</div>
+        </div>
+
+        <div class="field">
+            <label>Цена:</label>
+            <div>{{ product.price }} руб.</div>
+        </div>
+
+        <div class="field">
+            <label>Изображение:</label>
+            {% if product.image %}
+                <img src="{{ product.image.url }}" alt="{{ product.name }}">
+            {% else %}
+                <div>Нет изображения</div>
+            {% endif %}
+
+
+            <form action="{% url 'product_delete' product_id=product.id %}" method="post" style="display:inline;">
+    {% csrf_token %}
+    <button type="submit" style="background-color: red; color: white;">Удалить</button>
+</form>
+        </div>
+        <a href="{% url 'product_update' product.id %}" class="small-button">  Обновить</a>
+        <a href="{% url 'product_list' %}">← Назад к списку продуктов</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Уведомления</title>
+    <style>
+        #notifications {
+            padding: 20px;
+            background-color: #f1f1f1;
+            max-width: 500px;
+            margin: 50px auto;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .notify {
+            background-color: #d1e7dd;
+            color: #0f5132;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            font-family: Arial, sans-serif;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="notifications">
+        <h2>Уведомления:</h2>
+        <div id="messages"></div>
+    </div>
+
+    <script>
+        const socket = new WebSocket('ws://' + window.location.host + '/ws/users/');
+
+        socket.onmessage = function(event) {
+            const data = JSON.parse(event.data);
+            const div = document.createElement('div');
+            div.className = 'notify';
+            div.textContent = data.message;
+            document.getElementById('messages').prepend(div);
+        };
+
+        socket.onopen = () => console.log("WebSocket подключён ✅");
+        socket.onclose = () => console.log("WebSocket отключён ❌");
+    </script>
+</body>
+</html>
