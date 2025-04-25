@@ -1,10 +1,12 @@
 asgiref==3.8.1
 channels==4.2.2
 channels_redis==4.2.1
+dj-database-url==2.3.0
 Django==5.2
 djangorestframework==3.16.0
 djangorestframework_simplejwt==5.5.0
 drf-yasg==1.21.10
+gunicorn==23.0.0
 inflection==0.5.1
 Markdown==3.8
 msgpack==1.1.0
@@ -12,8 +14,10 @@ packaging==25.0
 pillow==11.2.1
 psycopg2-binary==2.9.10
 PyJWT==2.9.0
+python-decouple==3.8
 pytz==2025.2
 PyYAML==6.0.2
 redis==5.2.1
 sqlparse==0.5.3
+typing_extensions==4.13.2
 uritemplate==4.1.1
